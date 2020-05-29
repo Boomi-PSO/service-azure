@@ -113,6 +113,8 @@ public class AzureFacade {
             builder.addQueryOption("filter", filter, false);
         }
 
+        builder.addQueryOption("top", "999", false);
+
         return builder.build();
     }
 }
