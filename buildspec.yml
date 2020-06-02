@@ -1,0 +1,23 @@
+version: 0.2
+
+env:
+  variables:
+    JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
+
+phases:
+  install:
+    commands:
+      - apt-get update -y
+      - apt-get install -y maven
+      - apt-get install -y ant
+  build:
+    commands:
+      - ant -Doauth2.clientId=${ClientId} -Doauth2.clientSecret=${ClientSecret}
+      - mvn install
+  post_build:
+    commands:
+      - mvn package
+
+artifacts:
+  files:
+    - target/azure-1.0-SNAPSHOT.jar
