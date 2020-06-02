@@ -63,10 +63,10 @@ public class AzureFacade {
         String email = "";
         
         if (!mailProperty.isEmpty()) {
-            sitesEntitySetResponse.getProperty(mailProperty).getValue().toString();
+            email = sitesEntitySetResponse.getProperty(mailProperty).getValue().toString();
         }
         else {
-            sitesEntitySetResponse.getProperty("mail").getValue().toString();
+            email = sitesEntitySetResponse.getProperty("mail").getValue().toString();
         }
 
         if (email.isEmpty()) {
