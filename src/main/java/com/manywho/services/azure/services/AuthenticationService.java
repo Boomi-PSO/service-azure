@@ -34,8 +34,16 @@ public class AuthenticationService {
                 securityConfiguration.getOauth2ClientId(),
                 securityConfiguration.getOauth2ClientSecret());
 
+        String mailProperty = "";
+        String defaultEmail = "";
+
+        if (credentials.hasConfigurationValues()) {
+            mailProperty = credentials.getConfigurationValues().getContentValue("Email Property Name");
+            defaultEmail = credentials.getConfigurationValues().getContentValue("Default Email");
+        }
+
         JWT jwt = JWT.decode(authResponse.getAccess_token());
-        AzureUser azureUser = azureFacade.fetchCurrentUser(jwt.getToken());
+        AzureUser azureUser = azureFacade.fetchCurrentUser(jwt.getToken(), mailProperty, defaultEmail);
         AuthenticatedWhoResult authenticatedWhoResult = new AuthenticatedWhoResult();
 
         if (Strings.isNullOrEmpty(azureUser.getEmail()) == true) {

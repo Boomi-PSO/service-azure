@@ -31,6 +31,8 @@ public class DescribeController extends AbstractController {
                 .setCulture(new Culture("EN", "US"))
                 .addConfigurationValue(new DescribeValue("Username", ContentType.String, true))
                 .addConfigurationValue(new DescribeValue("Password", ContentType.Password, true))
+                .addConfigurationValue(new DescribeValue("Email Property Name", ContentType.String, false))
+                .addConfigurationValue(new DescribeValue("Default Email", ContentType.String, false))
                 .createDescribeService()
                 .createResponse();
     }

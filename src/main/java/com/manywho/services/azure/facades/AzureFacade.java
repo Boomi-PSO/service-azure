@@ -57,10 +57,23 @@ public class AzureFacade {
         return sitesEntitySetResponse.getProperty("id").getValue().toString();
     }
 
-    public AzureUser fetchCurrentUser(String token) {
+    public AzureUser fetchCurrentUser(String token, String mailProperty, String defaultEmail) {
         ODataEntity sitesEntitySetResponse = getEntitySetResponse(token, "me").getBody();
 
-        return new AzureUser(sitesEntitySetResponse.getProperty("mail").getValue().toString(),
+        String email = "";
+        
+        if (!mailProperty.isEmpty()) {
+            sitesEntitySetResponse.getProperty(mailProperty).getValue().toString();
+        }
+        else {
+            sitesEntitySetResponse.getProperty("mail").getValue().toString();
+        }
+
+        if (email.isEmpty()) {
+            email = defaultEmail;
+        }
+
+        return new AzureUser(email,
                 sitesEntitySetResponse.getProperty("givenName").getValue().toString(),
                 sitesEntitySetResponse.getProperty("surname").getValue().toString(),
                 sitesEntitySetResponse.getProperty("id").getValue().toString(),
