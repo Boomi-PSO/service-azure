@@ -60,15 +60,12 @@ public class AzureFacade {
     public AzureUser fetchCurrentUser(String token, String mailProperty, String defaultEmail) {
         ODataEntity sitesEntitySetResponse = getEntitySetResponse(token, "me").getBody();
 
-        String email = "";
-        
-        if (!mailProperty.isEmpty()) {
+        // precedence goes, 1) check email, 2) check mail property, 3) default email
+        String email = sitesEntitySetResponse.getProperty("mail").getValue().toString();;
+
+        if (email.isEmpty() && !mailProperty.isEmpty()) {
             email = sitesEntitySetResponse.getProperty(mailProperty).getValue().toString();
         }
-        else {
-            email = sitesEntitySetResponse.getProperty("mail").getValue().toString();
-        }
-
         if (email.isEmpty()) {
             email = defaultEmail;
         }
