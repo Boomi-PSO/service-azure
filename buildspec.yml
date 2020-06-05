@@ -10,7 +10,7 @@ phases:
       - apt-get install -y ant
   build:
     commands:
-      - ant -Doauth2.clientId=${ClientId} -Doauth2.clientSecret=${ClientSecret}
+      - ant -Doauth2.clientId=$ClientId -Doauth2.clientSecret=$ClientSecret
       - mvn install
   post_build:
     commands:
