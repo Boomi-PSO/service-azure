@@ -46,7 +46,7 @@ public class AzureProvider extends AbstractOauth2Provider {
     @Override
     public String getAuthorizationUrl(OAuthConfig config) {
 
-        return String.format("%s/oauth2/authorize?client_id=%s&scope=%s&response_type=%s",
+        return String.format("%s/oauth2/v2.0/authorize?client_id=%s&scope=%s&response_type=%s",
                 AUTHORITY_URI_V1, config.getApiKey(), "User.Read" , "code");
     }
 }
